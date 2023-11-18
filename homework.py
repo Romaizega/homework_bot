@@ -6,7 +6,6 @@ import json
 from http import HTTPStatus
 from contextlib import suppress
 
-
 import requests
 import telegram
 from dotenv import load_dotenv
@@ -53,8 +52,8 @@ def check_tokens() -> None:
 
     if missing_tokens:
         logger.critical(
-            'Отсутствуют'
-            'переменная окружения: {", ".join(missing_tokens)}')
+            f'Отсутствуют'
+            f'переменная окружения: {", ".join(missing_tokens)}')
         sys.exit('Не удалось обнаружить значения для указанных токенов.')
 
 
@@ -118,35 +117,33 @@ def parse_status(homework):
 def main():
     """Основная логика работы бота."""
     check_tokens()
-
     bot = telegram.Bot(token=TELEGRAM_TOKEN)
-
     timestamp = int(time.time())
-    last_sent_message = None
+    last_sent_message = ''
 
     while True:
-
         try:
             response = get_api_answer(timestamp)
-
             check_response(response)
-
             homeworks = response.get('homeworks', [])
-
             if homeworks:
                 message = parse_status(homeworks[0])
                 if message != last_sent_message:
                     send_message(bot, message)
                     last_sent_message = message
+                else:
+                    logger.debug('Получено повторяющееся сообщение')
+            else:
+                logger.debug('Отсутствие обновлений статуса')
             timestamp = response.get('current_date', timestamp)
-
         except telegram.TelegramError as error:
             message = f'Сбой в работе программы: {error}'
             logger.error(message, exc_info=True)
-
+            if message != last_sent_message:
+                send_message(bot, message)
+                last_sent_message = message
             with suppress(telegram.TelegramError):
                 send_message(bot, message)
-
         finally:
             time.sleep(RETRY_PERIOD)
 
