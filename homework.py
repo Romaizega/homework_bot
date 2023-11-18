@@ -52,7 +52,7 @@ def check_tokens() -> None:
 
     if missing_tokens:
         logger.critical(
-            f'Отсутствуют'
+            'Отсутствуют '
             f'переменная окружения: {", ".join(missing_tokens)}')
         sys.exit('Не удалось обнаружить значения для указанных токенов.')
 
@@ -125,7 +125,7 @@ def main():
         try:
             response = get_api_answer(timestamp)
             check_response(response)
-            homeworks = response.get('homeworks', [])
+            homeworks = response['homeworks']
             if homeworks:
                 message = parse_status(homeworks[0])
                 if message != last_sent_message:
@@ -136,14 +136,15 @@ def main():
             else:
                 logger.debug('Отсутствие обновлений статуса')
             timestamp = response.get('current_date', timestamp)
-        except telegram.TelegramError as error:
+        except telegram.TelegramError:
+            logger.error('Ошибка отправки сообщения в Телеграм')
+        except Exception as error:
             message = f'Сбой в работе программы: {error}'
             logger.error(message, exc_info=True)
             if message != last_sent_message:
-                send_message(bot, message)
-                last_sent_message = message
-            with suppress(telegram.TelegramError):
-                send_message(bot, message)
+                with suppress(telegram.TelegramError):
+                    last_sent_message = message
+                    send_message(bot, message)
         finally:
             time.sleep(RETRY_PERIOD)
 
