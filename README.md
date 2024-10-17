@@ -1,17 +1,18 @@
-# Проект "Telegram bot-assistance"
-Проект "Бот-ассистент" представляет собой учебное приложение, реализующее функциональность бота-ассистента для мессенджера Telegram. Этот бот помогает отправлять сообщения со статусом проверки домашних заданий и обеспечивает логирование каждого действия в консоли, а также сохранение логов в отдельный файл.
+# **Project "Telegram bot-assistance"**  
+The "Assistant Bot" project is an educational application that implements the functionality of an assistant bot for the Telegram messenger. This bot helps send messages with the status of homework checks and provides logging of each action in the console, as well as saving logs to a separate file.
 
-### Основные возможности
-- Отправка сообщения со статусом проверки домашних заданий: Бот позволяет отправлять статус проверки домашних заданий пользователям по их запросу.
-- Логирование действий в консоли: Каждое действие бота логируется и выводится в консоль для отслеживания работы приложения.
-- Сохранение логов в отдельный файл: Логи также сохраняются в отдельный файл для последующего анализа и мониторинга работы бота.
-### Основная польза проекта
-Проект "Telegram bot-assistance" предоставляет возможность понять основы создания ботов для Telegram и ознакомиться с различными техниками и инструментами разработки:
-- Python Telegram Bot: Используется библиотека Python Telegram Bot для создания структуры и функциональности бота.
-- .env файлы: Для безопасного хранения конфиденциальной информации используется .env файл, а парсинг переменных окружения осуществляется через load_dotenv().
-- Кастомный логер: Создан кастомный логер для логирования действий бота с возможностью настройки уровня детализации логов.
-- Кастомное исключение: Реализовано кастомное исключение для обработки ошибок и исключительных ситуаций в приложении.
-- Unix Timestamp: Для удобства отслеживания времени событий используется Unix Timestamp.
+### **Main Features**  
+- **Sending messages with homework check status:** The bot allows users to request and receive the status of their homework checks.  
+- **Logging actions in the console:** Every action of the bot is logged and displayed in the console for tracking the application's performance.  
+- **Saving logs to a separate file:** Logs are also saved to a separate file for further analysis and monitoring of the bot's operation.  
 
-### Заключение
-Проект "Бот-ассистент" является отличным способом изучить основы разработки ботов для Telegram и применить различные концепции программирования на практике. Он помогает освоить различные инструменты и подходы к созданию учебных проектов с использованием Python и библиотек для работы с Telegram API.
+### **Main Benefits of the Project**  
+The "Telegram bot-assistance" project provides an opportunity to understand the fundamentals of creating bots for Telegram and to explore various techniques and development tools:  
+- **Python Telegram Bot:** The Python Telegram Bot library is used to create the structure and functionality of the bot.  
+- **.env files:** To securely store sensitive information, a .env file is used, and environment variables are parsed using load_dotenv().  
+- **Custom Logger:** A custom logger is created for logging the bot's actions, with the ability to configure the level of detail in the logs.  
+- **Custom Exception:** A custom exception is implemented to handle errors and exceptional situations within the application.  
+- **Unix Timestamp:** Unix Timestamp is used for convenience in tracking the timing of events.  
+
+### **Conclusion**  
+The "Assistant Bot" project is an excellent way to learn the fundamentals of bot development for Telegram and to apply various programming concepts in practice. It helps to master different tools and approaches to creating educational projects using Python and libraries for working with the Telegram API.
